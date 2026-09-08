@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@source '../index.html';
+@source './';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Arial', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SFMono-Regular', 'Consolas', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-signal: var(--signal);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
+  --color-line: var(--line);
+  --color-muted-foreground: var(--muted-foreground);
+  --animate-fade-slide-in-1: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  --animate-fade-slide-in-2: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  --animate-fade-slide-in-3: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  --animate-fade-slide-in-4: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  --animate-hero-zoom: heroZoom 26s ease-in-out infinite alternate;
+  --animate-grid-drift: gridDrift 34s linear infinite;
+  --animate-float-slow: floatY 11s ease-in-out infinite;
+  --animate-scroll-cue: scrollCue 2.1s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  --animate-pulse-ring: pulseRing 2.6s ease-out infinite;
+  --animate-menu-in: menuIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 42s linear infinite;
+}
+
+:root {
+  color-scheme: dark;
+  --background: oklch(0.12 0.015 250);
+  --foreground: oklch(0.96 0.01 100);
+  --surface: oklch(0.16 0.018 250);
+  --signal: oklch(0.78 0.17 73);
+  --cyan: oklch(0.76 0.13 205);
+  --lime: oklch(0.82 0.16 125);
+  --line: oklch(0.96 0.01 100 / 16%);
+  --muted-foreground: oklch(0.72 0.02 240);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--background); }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, 'Helvetica Neue', sans-serif; }
+
+.nav-link { color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; transition: color 180ms ease; }
+.nav-link:hover { color: var(--signal); }
+.eyebrow { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.hero-grid { background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to bottom, black, transparent 88%); }
+
+/* Hero interactivity: --px/--py are pointer offsets (-1..1), --mx/--my the raw
+   cursor position, --glow the spotlight strength. All set from Hero's pointer handler. */
+.hero-stage { --px: 0; --py: 0; --mx: 50%; --my: 40%; --glow: 0; }
+.hero-parallax { transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
+.hero-spotlight {
+  background: radial-gradient(620px circle at var(--mx) var(--my), color-mix(in oklab, var(--signal) 20%, transparent), transparent 72%);
+  opacity: var(--glow);
+  transition: opacity 450ms ease;
+}
+.hero-word { display: inline-block; animation: fadeSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.magnetic { transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.16); }
+}
+@keyframes gridDrift {
+  from { background-position: 0 0; }
+  to { background-position: 72px 72px; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+@keyframes scrollCue {
+  0% { transform: translateY(0); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(20px); opacity: 0; }
+}
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  70% { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*='animate-'], .hero-word { animation: none !important; }
+  .hero-parallax { transform: none !important; transition: none !important; }
+  .hero-spotlight { opacity: 0 !important; }
+  .magnetic { transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,14 @@
+# Environment variables
+.env*.local
+
+# Common ignores
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
