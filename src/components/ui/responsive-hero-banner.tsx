@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, Cloud, Menu, Play, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Menu, Play, X } from "lucide-react";
 
 interface NavLink {
   label: string;
@@ -10,6 +10,7 @@ interface NavLink {
 interface ResponsiveHeroBannerProps {
   brandName?: string;
   brandHref?: string;
+  brandLogoUrl?: string;
   backgroundImageUrl?: string;
   navLinks?: NavLink[];
   ctaButtonText?: string;
@@ -108,8 +109,9 @@ function MagneticLink({
 }
 
 const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
-  brandName = "FAMCLOUD",
+  brandName = "FamCloud",
   brandHref = "#top",
+  brandLogoUrl = "/famcloud-logo.png",
   backgroundImageUrl = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=80",
   navLinks = [
     { label: "Services", href: "#services" },
@@ -224,15 +226,16 @@ const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
             <a
               href={brandHref}
               onClick={closeMobileMenu}
-              className="group flex items-center gap-2.5"
+              className="group flex items-center"
               aria-label={`${brandName} home`}
             >
-              <span className="grid size-8 place-items-center bg-signal text-background transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
-                <Cloud className="size-4" strokeWidth={2.5} />
-              </span>
-              <span className="font-mono text-sm font-bold tracking-[0.2em] text-foreground transition-[letter-spacing] duration-300 group-hover:tracking-[0.26em]">
-                {brandName}
-              </span>
+              <img
+                src={brandLogoUrl}
+                alt={brandName}
+                width={610}
+                height={339}
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105 md:h-12"
+              />
             </a>
 
             <nav

@@ -1,4 +1,4 @@
-import { Cloud } from "lucide-react";
+import { Cloud, Mail } from "lucide-react";
 
 /** lucide-react v1 dropped brand marks, so the social glyphs are inline paths. */
 const socials = [
@@ -64,19 +64,31 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1.8fr]">
           <div>
-            <a href="#top" className="group flex items-center gap-2.5">
-              <span className="grid size-8 place-items-center bg-signal text-background transition-transform duration-300 group-hover:-rotate-12">
-                <Cloud className="size-4" strokeWidth={2.5} />
-              </span>
-              <span className="font-mono text-sm font-bold tracking-[0.2em]">
-                FAMCLOUD
-              </span>
+            <a
+              href="#top"
+              className="group inline-flex"
+              aria-label="FamCloud home"
+            >
+              <img
+                src="/famcloud-logo.png"
+                alt="FamCloud"
+                width={610}
+                height={339}
+                className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
             </a>
             <p className="mt-6 max-w-sm text-sm leading-6 text-muted-foreground">
               We are a team of passionate experts delivering world-class cloud
               computing and software engineering services tailored for modern
               businesses.
             </p>
+            <a
+              href="mailto:support@famclouds.com"
+              className="mt-6 inline-flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-signal"
+            >
+              <Mail className="size-4 shrink-0 text-signal" />
+              support@famclouds.com
+            </a>
             <div className="mt-8 flex gap-3">
               {socials.map(({ label, href, path }) => (
                 <a
