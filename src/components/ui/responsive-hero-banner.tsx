@@ -232,8 +232,8 @@ const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
               <img
                 src={brandLogoUrl}
                 alt={brandName}
-                width={610}
-                height={339}
+                width={500}
+                height={260}
                 className="h-10 w-auto transition-transform duration-300 group-hover:scale-105 md:h-12"
               />
             </a>

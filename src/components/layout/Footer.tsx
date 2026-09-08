@@ -72,8 +72,8 @@ export default function Footer() {
               <img
                 src="/famcloud-logo.png"
                 alt="FamCloud"
-                width={610}
-                height={339}
+                width={500}
+                height={260}
                 className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </a>
